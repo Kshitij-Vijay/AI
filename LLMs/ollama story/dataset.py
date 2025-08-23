@@ -3,7 +3,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_ollama import OllamaEmbeddings
 
 
-def create_vectorstore(text: str, model_name: str = "mistral"):
+def create_vectorstore(text: str, model_name: str = "nomic-embed-text"):
     """
     Create a searchable vectorstore from input text using embeddings.
     """
