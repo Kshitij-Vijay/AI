@@ -1,7 +1,12 @@
 from dataset import create_vectorstore
 from langchain.chains import RetrievalQA
 from langchain_ollama import OllamaLLM
-import ollama  # official Ollama python client
+import os
+import ollama
+
+ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+client = ollama.Client(host=ollama_host)
+
 
 def choose_model(model_type="llm"):
     resp = ollama.list()
