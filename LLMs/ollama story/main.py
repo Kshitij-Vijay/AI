@@ -4,17 +4,18 @@ from langchain_ollama import OllamaLLM
 import os
 import ollama
 
-ollama_host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+
+ollama_host = os.environ.get("OLLAMA_HOST", "http://ollama:11434")
 client = ollama.Client(host=ollama_host)
 
 
 def choose_model(model_type="llm"):
-    resp = ollama.list()
+    resp = client.list()
     print("Ollama list response:", resp)
     models = resp.get("models", [])
     ...
 
-    models = ollama.list()["models"]
+    models = client.list()["models"]
 
     # Filter models by type
     if model_type == "embedding":

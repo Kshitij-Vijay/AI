@@ -1,0 +1,20 @@
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    # command: sh -c "ollama pull nomic-embed-text:latest && ollama pull llama2:latest && ollama serve"
+
+  app:
+    build: .
+    depends_on:
+      - ollama
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - .:/app
+
+volumes:
+  ollama-data:
