@@ -18,7 +18,7 @@ docker-compose exec ollama ollama ls
 # Run the Python app container interactively
 # docker-compose run --rm -it app
 
-# docker build -t app
+# docker build -t app 
 
 # docker-compose run --rm -it app sh
 
