@@ -2,6 +2,7 @@ from utils import get_pdf_path_via_dialog
 from pdf_extractor import extract_pdf_content
 from ollama_client import choose_model, create_vectorstore
 from langchain_ollama import OllamaLLM
+from langchain.chains import RetrievalQA
 
 def main():
     print("Please select the PDF file to process.")
@@ -25,15 +26,15 @@ def main():
     print("[INFO] Ready to answer questions. Enter 'exit' to quit.")
 
     
+    # Step 2: Pick LLM
+    llm_model = choose_model("llm")
+    llm = OllamaLLM(model=llm_model)
 
     while True:
         query = input("Enter your question: ").strip()
         if query.lower() == "exit":
             break
         try:
-            # Step 2: Pick LLM
-            llm_model = choose_model("llm")
-            llm = OllamaLLM(model=llm_model)
 
             retriever = vectorstore.as_retriever()
             qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
